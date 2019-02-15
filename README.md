@@ -15,7 +15,7 @@ pi@raspberrypi:~/beacons $ sudo node advertisement-discovery.js
 ```
 The result is:
 
-```console
+```bash
 peripheral discovered (cd1244573708 with address <cd:12:44:57:37:08, random>, connectable false, RSSI -20:
 	hello my local name is:
 		undefined
