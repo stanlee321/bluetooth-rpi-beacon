@@ -48,7 +48,7 @@ For check the peripherals info:
 pi@raspberrypi:~/beacons $ sudo node peripheral-discover.js cd1244573708
 ```
 
-```console
+```bash
 peripheral with ID cd1244573708 found
   Service Data      = [
   {
@@ -147,7 +147,7 @@ pi@raspberrypi:~/beacons $ sudo node puck.js
 ```
 
 The result for MAC cd:12:44:57:37:08 is
-```console
+```bash
 
 cd:12:44:57:37:08 -72 undefined undefined [ 32, 0, 11, 167, 31, 64, 6, 152, 167, 215, 6, 28, 216, 90 ]
 cd:12:44:57:37:08 -71 undefined undefined [ 32, 0, 11, 167, 31, 64, 6, 152, 167, 230, 6, 28, 216, 100 ]
@@ -300,7 +300,7 @@ cd:12:44:57:37:08 -30 undefined undefined [ 32, 0, 11, 167, 34, 0, 6, 152, 179, 
 
 Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacons.
 
-```console
+```bash
 
 pi@raspberrypi:~/beacons $ sudo node puck.js 
 Starting scan...
@@ -390,6 +390,7 @@ cd:12:44:57:37:08 -31 undefined undefined [{"uuid":"feaa","data":{"type":"Buffer
 
 ## TODOS
 * Calculate the distance to beacon and detect movement using the  rssi signal strength and some buffer data.
+* Test python libraries
 
 ## References
 * https://qiita.com/tinoue@github/items/17ca0046013f6ae76853
