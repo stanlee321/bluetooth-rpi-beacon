@@ -146,7 +146,7 @@ For check the traffic:
 pi@raspberrypi:~/beacons $ sudo node puck.js
 ```
 
-The result is
+The result for MAC cd:12:44:57:37:08 is
 ```console
 
 cd:12:44:57:37:08 -72 undefined undefined [ 32, 0, 11, 167, 31, 64, 6, 152, 167, 215, 6, 28, 216, 90 ]
@@ -298,7 +298,7 @@ cd:12:44:57:37:08 -30 undefined undefined [ 32, 0, 11, 167, 34, 0, 6, 152, 179, 
 
 ```
 
-Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacon.
+Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacons.
 
 ```console
 
@@ -376,6 +376,39 @@ cd:12:44:57:37:08 -31 undefined undefined [{"uuid":"feaa","data":{"type":"Buffer
 
 ```
 
-# TODOS
+## Conclusions
+* It is possible to connect to beacons using noble.
+* The beacons does not use a standar access point to sensor data.
+* The beacons have a continious  buffer stream for the MAC addresses:
+  - cd:12:44:57:37:08
+  - e7:da:df:9c:ed:70
+  - f4:0d:c8:46:7f:c6
 
-* Calculate distance to beacon and detect movement using the  rssi signal strength and some buffer data.
+  Where cd:12:44:57:37:08 seems to contain information about the inner clock and some other unknown informations related to maybe sensors in the array that starts with 32 [32,0,11,153,33,128,6,153,0,234,6,29,36,54], the position 10 in the array increases each second by 1 and runs up 256 increasing the value for the position 9 of the array by 1, other positions in the array seems to change randomly or when you  move physically the beacon.
+* When you press the button in the beacon, it interacts with the MAC e7:da:df:9c:ed:70 and it just flips the value 35 to 36 in the array [76,0,2,21,247,130,109,166,79,162,78,152,128,36,188,91,113,224,137,62,233,35,146,243,179] for a period of 5 seconds.
+
+
+## TODOS
+* Calculate the distance to beacon and detect movement using the  rssi signal strength and some buffer data.
+
+## References
+* https://qiita.com/tinoue@github/items/17ca0046013f6ae76853
+* https://github.com/noble/noble/issues/673
+* [GOOD_GOOD_REFERENCE](https://www.espruino.com/Puck.js+Advertising)
+* https://github.com/adafruit/Adafruit_Python_BluefruitLE
+* https://github.com/noble/noble/issues/552#issuecomment-288995711
+* https://github.com/noble/noble/issues/552
+* https://github.com/noble/noble/issues/329
+* [Cheat_Sheet](https://ukbaz.github.io/howto/beacon_scan_cmd_line.html)
+* https://github.com/IanHarvey/bluepy
+* https://github.com/sandeepmistry/node-bleacon
+* https://www.switchdoc.com/2014/08/ibeacon-raspberry-pi-scanner-python/
+* https://developer.kontakt.io/hardware/sensors/
+* https://github.com/noble/noble/issues/685
+* https://github.com/noble/noble/issues/690 
+* https://github.com/noble/noble/issues/807
+* https://github.com/noble/noble/issues/824
+* https://github.com/noble/noble/issues/845
+* https://github.com/noble/noble/issues/846
+* https://github.com/noble/noble/issues/854
+* https://scribles.net/running-ble-advertising-example-code-on-raspbian-stretch/
