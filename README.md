@@ -11,7 +11,13 @@ cd ~/
 
 get https://nodejs.org/dist/latest-v9.x/node-v9.11.2-linux-armv7l.tar.xz
 
-tar xf node-v9.11.2-linux-armv7l.tar.xz
+tar -xf node-v9.11.2-linux-armv7l.tar.xz
+
+cd node-v9.11.2-linux-armv7l/
+sudo cp -R * /usr/local/
+
+node -v
+npm -v
 
 ```
 ## How to run
