@@ -5,7 +5,10 @@ Test script for debug the beacons.
 ## Installation
 
 You must to install node v9 for ARMv7 devices.  Follow [this](https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/) tutorial. Also, follow noble instruction for install [noble](https://github.com/noble/noble).
-
+### install node v9
+```
+wget https://nodejs.org/dist/latest-v9.x/node-v9.11.2-linux-armv7l.tar.xz
+```
 ## How to run
 
 For find beacon devices:
