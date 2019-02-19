@@ -234,7 +234,7 @@ With normal scale
 ## TODOS
 * Log rssi signal strength in the sqlite db.
 * Refactor important functions in the code.
-* Implement a timeseries plot in html and javascript.
+* Implement a timeseries plot in html and javascript, for real-time movement display in the browser.
 * Implement algorithm for classify movement/no-movement from data
 * Log this classification in other sqlite db.
 
