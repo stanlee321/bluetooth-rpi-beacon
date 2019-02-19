@@ -221,7 +221,7 @@ With normal scale:
 
 #### For the Static case
 
-In this state the beacon was been left in a table for around 20 minutes.
+In this state the beacon is left on a table for around 20 minutes.
 
 With y-logaritmic scale
 
