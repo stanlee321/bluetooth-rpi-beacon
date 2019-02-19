@@ -196,21 +196,22 @@ Once the telemetry is activated in the beacon, we can access to the new peripher
 
 The example array has the properties for detect the beacon movements. We log this information into a my_db*.sqlite3 database. Here is the plot for the values of the array in a time series fashion, the most important arrays are the ones which are ploted below.
 
-### Feature imporance
+#### Feature imporance
 
-The feature importance was checked using a histrogram for the timeseries data. The feature importance is showed below:
+The feature importance was checked using a histrogram for the timeseries data.
+ The feature importance is showed below:
 
-### For Movement case
+#### For Movement case
 <div style="text-align:center"><img src ="./timeseries/plots/features_mov.png" /></div>
 
-### For Static case
+#### For Static case
 <div style="text-align:center"><img src ="./timeseries/plots/features.png" /></div>
 
 There are 22 features, from which it seems that just 8 participate in the movement-sensors.
 
-### For Movement case
+#### For Movement case
 
-For this scenario, the beacon was carried by a pedestrian by around 30 min, the movement of the pedestrian is displayed below.
+For this scenario, the beacon was carried by a pedestrian for around 30 min, the movement of the pedestrian is displayed below.
 
 With y-logaritmic scale
 <div style="text-align:center"><img src ="./timeseries/plots/mydb_plot_log.png" /></div>
@@ -218,7 +219,7 @@ With y-logaritmic scale
 With normal scale:
 <div style="text-align:center"><img src ="./timeseries/plots/mydb_plot.png" /></div>
 
-### For the Static case
+#### For the Static case
 
 In this state the beacon was been left in a table for around 20 minutes.
 
