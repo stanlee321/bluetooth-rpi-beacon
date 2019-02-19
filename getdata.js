@@ -19,7 +19,7 @@ noble.on('discover', function(peripheral) {
     // f4:0d:c8:46:7f:c6
     // cd1244573708: [Peripheral],
     // e7dadf9ced70: [Peripheral],
-    //f40dc8467fc6: [Circular] },
+    // f40dc8467fc6: [Circular] },
 
   if(peripheral.address==='cd:12:44:57:37:08'){
     obtenerInfoPulsera(peripheral);
