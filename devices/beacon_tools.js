@@ -34,6 +34,7 @@ module.exports = {
           manufacturer: peripheral.advertisement.localName,
           uuid: peripheral.advertisement.serviceData[0].uuid,
           telemetry: {
+            timeStamp: my_values[0],
             x: my_values[5],
             y: my_values[6],
             z: my_values[7]

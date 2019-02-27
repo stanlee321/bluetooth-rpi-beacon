@@ -187,8 +187,193 @@ cd:12:44:57:37:08 -30 undefined undefined [ 32, 0, 11, 167, 34, 0, 6, 152, 179, 
 
 Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacons.
 
+## Update 27.feb.2019
+Thanks to the plots, we identify the x y z componets of the telemetry. The next plot shows the behavior of moving the beacon in a table in X , later in Y and the Z componets.
+
+<div style="text-align:center"><img src ="./timeseries/plots/xyz.png" /></div>
+
+### Refactor
+
+A refactor process was made in the repo, now the principal modules of the script are in separate folders and sub classes. You can run the application with:
+
+```console
+pi@raspberrypi:~/beacons $ sudo node app.js
+```
+
+with the following log:
 
 
+```bash
+pi@raspberrypi:~/bluetooth-rpi-beacon $ sudo node app.js 
+Database created!
+Starting scan...
+Scanning started.
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -72,
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 8,
+		"y": 31,
+		"z": 202
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -71,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 20,
+		"y": 51,
+		"z": 16
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -73,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 231,
+		"y": 210,
+		"z": 27
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -69,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 4,
+		"y": 240,
+		"z": 59
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -72,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 240,
+		"z": 60
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -77,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 239,
+		"z": 59
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -71,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 2,
+		"y": 240,
+		"z": 60
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -70,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 240,
+		"z": 60
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -72,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 239,
+		"z": 60
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -71,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 240,
+		"z": 58
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -70,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 4,
+		"y": 240,
+		"z": 60
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -70,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 240,
+		"z": 59
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -68,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 2,
+		"y": 239,
+		"z": 59
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -71,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 239,
+		"z": 60
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -73,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"x": 3,
+		"y": 239,
+		"z": 60
+	}
+}
+
+```
 ## Update
 Once the telemetry is activated in the beacon, we can access to the new peripheral.address ```c1:93:da:19:eb:cd```, this peripheral address emit 3 vector arrays types, from which we are just interested in the array with length of 22 .
 * [3,9,2,16,0,2,62,255,255,224,12,6,1,185,135,108,92,100,3,5,255,27]
