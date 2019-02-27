@@ -39,7 +39,7 @@ module.exports = {
             z: my_values[7]
           }
         };
-        console.log(JSON.stringify(my_data))
+        console.log(JSON.stringify(my_data,  null, '\t'))
         // my_db.insertData(my_values)         
       }
     }
