@@ -43,7 +43,7 @@ module.exports = {
         // my_db.insertData(my_values)         
       }
     } else {
-      console.log(array)
+      console.log(peripheral.advertisement.serviceData)
     }
   }
 }
