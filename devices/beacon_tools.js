@@ -34,9 +34,9 @@ module.exports = {
           manufacturer: peripheral.advertisement.localName,
           uuid: peripheral.advertisement.serviceData[0].uuid,
           telemetry: {
-            x: my_values[4],
-            y: my_values[5],
-            z: my_values[6]
+            x: my_values[5],
+            y: my_values[6],
+            z: my_values[7]
           }
         };
         console.log(JSON.stringify(my_data))
