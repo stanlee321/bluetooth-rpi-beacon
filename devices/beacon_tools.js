@@ -27,7 +27,7 @@ module.exports = {
               let my_data = {
                   addrs: peripheral.address,
                   signal: peripheral.rssi,
-                  manufacturer: peripheral.advertisement.manufacturerData,
+                  manufacturer: peripheral.advertisement.localName,
                   uuid: peripheral.advertisement.serviceData[0].uuid,
                   telemetry: {
                     x : my_values[4],
@@ -35,11 +35,11 @@ module.exports = {
                     z : my_values[6]
                   }
               };
-              console.log(my_data)
+              console.log(JSON.stringify(my_data))
               // my_db.insertData(my_values)         
           }
         }else{
-          console.log('corruption...')
+          console.log(my_values)
         }
     }
 }
