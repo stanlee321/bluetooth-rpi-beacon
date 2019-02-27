@@ -192,6 +192,8 @@ Thanks to the plots, we identify the x y z componets of the telemetry in the arr
 
 <div style="text-align:center"><img src ="./timeseries/plots/xyz.png" /></div>
 
+`a13` seems to be some kind of Force Sensor , accidentally I drop the device to the floor and this down in the graph for `a13` reflect this event.
+
 ### Refactor
 
 A refactor process was made in the repo, now the principal modules of the script are in separate folders and sub classes. You can run the application with:
