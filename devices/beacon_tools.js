@@ -42,8 +42,6 @@ module.exports = {
         console.log(JSON.stringify(my_data))
         // my_db.insertData(my_values)         
       }
-    } else {
-      console.log(peripheral.advertisement.serviceData)
     }
   }
 }
