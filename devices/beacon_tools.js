@@ -30,7 +30,7 @@ module.exports = {
 
         let my_data = {
           addrs: peripheral.address,
-          signal: peripheral.rssi,
+          rssiDB: peripheral.rssi,
           manufacturer: peripheral.advertisement.localName,
           uuid: peripheral.advertisement.serviceData[0].uuid,
           telemetry: {
