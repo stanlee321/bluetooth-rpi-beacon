@@ -1,17 +1,24 @@
 import sqlite3
 import pandas as pd
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 class DataManager:
     def __init__(self):
+        """
+        X = Orange (a5)
+        Y = Green (a6)
+        Z = Blue (a4)
 
+        Force = a13
+        """
         self._unused = ["a0", "a1", "a11", "a12", "a15",
-                    "a16", "a17", "a18", "a19", "a2", "a20", "a3", "a7", "a8"]
+                    "a16", "a17", "a18", "a19", "a2", "a20", "a3", "a7", "a8",
+                    "a9", "a10", "a14", "a21"]
 
         self._used = ['id', 'TimeStamp', "a0","a1", "a2", "a3", "a4", "a5","a6", "a7", "a8",
                     "a9", "a10","a11","a12", "a13", "a14", "a15","a16", "a17", "a18", "a19", "a20", "a21"]
-    
+
     def _create_connection(self, db_file):
         """ create a database connection to the SQLite database
             specified by the db_file
@@ -69,6 +76,9 @@ class DataManager:
         plt.show()
         #plt.savefig('plots/mydb_2_plot_log.png', format='png', dpi=300)
 
+    def add_magnitude(self, df):
+        df['magnitude'] = np.sqrt(df["a4"]**2 + df["a5"]**2 + df["a6"]**2)
+        return df
     def get_df(self, database):
         df = self._create_df_from_sql(database)
         df = self._process_df(df)
@@ -76,13 +86,16 @@ class DataManager:
 
 if __name__ == '__main__':
     model = DataManager()    
-    database = "./mydb_2.sqlite3"
+    database = "./mydb3.sqlite3"
 
     # Clean dataframe
     df = model.get_df(database)
 
+    # Add magnitude
+    df = model.add_magnitude(df)
+    
     # Convert to series
-    series = model.df_to_series(df, '240s')
+    series = model.df_to_series(df, '10s')
 
     # Plot
     model.plot_df(series)
