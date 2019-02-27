@@ -1,4 +1,4 @@
-var database = require('../db/db.js')
+var DataBase = require('../db/db.js')
 var dateTime = require('node-datetime');
 
 my_db = new DataBase('./mydb.sqlite3')
