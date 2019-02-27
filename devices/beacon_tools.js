@@ -1,7 +1,7 @@
 var database = require('../db/db.js')
 var dateTime = require('node-datetime');
 
-my_db = database('./mydb.sqlite3')
+my_db = new DataBase('./mydb.sqlite3')
 
 module.exports = {
     onDiscovery: function(peripheral) {
