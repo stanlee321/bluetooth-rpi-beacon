@@ -61,10 +61,13 @@ function onDiscovery(peripheral) {
 
   /*
 
-  // f7:af:35:99:f2:84 
-  // cd:12:44:57:37:08
-  // d1:17:07:37:40:ba  // sensor
-  // c1:93:da:19:eb:cd
+  // b8:27:eb:91:1a:5a temp
+
+  // f7:af:35:99:f2:84  // NONE
+  // cd:12:44:57:37:08  // NONE works
+  // d1:17:07:37:40:ba  // sensor Periodic data of something
+  // c1:93:da:19:eb:cd  // XYZ-TEMP
+  
   if (peripheral.address === "c1:93:da:19:eb:cd") {
     var dat =  JSON.stringify(peripheral.advertisement.serviceData[0])
     console.log(

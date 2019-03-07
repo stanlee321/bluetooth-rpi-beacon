@@ -12,13 +12,23 @@ class DataManager:
 
         Force = a13
         """
-        self._unused = ["a0", "a1", "a11", "a12", "a15",
-                    "a16", "a17", "a18", "a19", "a2", "a20", "a3", "a7", "a8",
-                    "a9", "a10", "a14", "a21"]
+        # for all the xyz
+        #self._unused = ["a0", "a1", "a11", "a12", "a15",
+        #            "a16", "a17", "a18", "a19", "a2", "a20", "a3", "a7", "a8",
+        #            "a9", "a10", "a14", "a21"]
 
         self._used = ['id', 'TimeStamp', "a0","a1", "a2", "a3", "a4", "a5","a6", "a7", "a8",
                     "a9", "a10","a11","a12", "a13", "a14", "a15","a16", "a17", "a18", "a19", "a20", "a21"]
+        
+        # For temperature
+        #self._unused = list(set(["a0", "a2", "a3", "a4"] + self._used) - set(["a21"]))
 
+        # For ALl
+
+        self._unused = []
+        # For unknow periodic something
+        #self._unused = ["a0", "a1", "a2", "a4", "a21", "a20", "a12", "a15", "a10", "a19", "a11", "a6", "a7", "a3", "a8",
+        #                                         "a14", "a15", "a16", "a17", "a18"]
     def _create_connection(self, db_file):
         """ create a database connection to the SQLite database
             specified by the db_file
@@ -46,7 +56,7 @@ class DataManager:
             df = self._read_as_df(conn)
         return df
 
-    def _process_df(self, df):
+    def _process_df(self, df, use_all=False):
         
         df.drop(df.index[0], inplace=True)
 
@@ -54,13 +64,18 @@ class DataManager:
         datetime_rowid = df['time'].map(lambda t: pd.to_datetime(t, format='%Y-%m-%d %H:%M:%S'))
         df.index = datetime_rowid
 
-        ## CHANGE COLUMN NAMES
-        df.columns = self._used
+        if use_all == False:
+            ## CHANGE COLUMN NAMES
+            df.columns = self._used
 
-        to_drop = ['TimeStamp', 'id' ] + self._unused
+            to_drop = ['TimeStamp', 'id' ] + self._unused
 
-        df.drop(to_drop, axis = 1, inplace = True)
-        
+            df.drop(to_drop, axis = 1, inplace = True)
+        else:
+            df.columns = self._used 
+            print(df.columns)
+            to_drop = ['TimeStamp', 'id' ] + self._unused
+            df.drop(to_drop, axis = 1, inplace = True)
         return df
 
     def df_to_series(self, df, period):
@@ -74,22 +89,22 @@ class DataManager:
         #plt.figure()
         df_series.plot(figsize=(20,10),sort_columns=True, logy=False);
         plt.show()
-        #plt.savefig('plots/mydb_2_plot_log.png', format='png', dpi=300)
+        #plt.savefig('plots/d117073740ba_ds_3.png', format='png', dpi=300)
 
     def add_magnitude(self, df):
-        df['magnitude'] = np.sqrt(df["a4"]**2 + df["a5"]**2 + df["a6"]**2)
+        #df['magnitude'] = np.sqrt(df["a4"]**2 + df["a5"]**2 + df["a6"]**2)
         return df
-    def get_df(self, database):
+    def get_df(self, database, use_all=False):
         df = self._create_df_from_sql(database)
-        df = self._process_df(df)
+        df = self._process_df(df, use_all)
         return df
 
 if __name__ == '__main__':
     model = DataManager()    
-    database = "./mydb3.sqlite3"
+    database = "./ds_0.sqlite3"
 
     # Clean dataframe
-    df = model.get_df(database)
+    df = model.get_df(database, use_all=False)
 
     # Add magnitude
     df = model.add_magnitude(df)
