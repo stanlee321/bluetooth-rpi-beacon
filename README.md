@@ -186,6 +186,17 @@ cd:12:44:57:37:08 -30 undefined undefined [ 32, 0, 11, 167, 34, 0, 6, 152, 179, 
 ```
 
 Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacons.
+## Update 06.mar.2019
+
+* Added temperature address from 22 lenght vector
+<div style="text-align:center"><img src ="./timeseries/plots/temp_ds_0.png" /></div>
+
+* Added main frontend scripts for draw time series data into the folder `frontend/index.hmtl`
+
+### TODO
+* Add Temperature value to the JSON Log
+* Implement REST API for get data values and plot live charts with the data using the frontend scripts.
+* Implement main classification algorithm for move/no-move.
 
 ## Update 27.feb.2019
 Thanks to the plots, we identify the x y z componets of the telemetry in the array with 22 length. The next plot shows the behavior of moving the beacon in a table in X , later in Y and the Z componets.
