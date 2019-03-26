@@ -1,7 +1,7 @@
-var DBModule = require('../db/db_extends.js')
-var dateTime = require('node-datetime');
+const DBModule = require('../db/db_extends.js')
+const dateTime = require('node-datetime');
 
-myDB = new DBModule('./telemetry_data.sqlite3')
+const myDB = new DBModule('./telemetry_data.sqlite3')
 
 module.exports = {
   
