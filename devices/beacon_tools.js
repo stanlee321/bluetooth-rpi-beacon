@@ -1,4 +1,4 @@
-var DBModule = require('../db/db_extends')
+var DBModule = require('../db/db_extends.j')
 var dateTime = require('node-datetime');
 
 myDB = new DBModule('./telemetry_data.sqlite3')
