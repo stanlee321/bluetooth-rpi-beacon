@@ -1,4 +1,4 @@
-var Devices = require('./devices/beacon_extends.js')
+var Devices = require('./devices/beacon_base.js')
 
 beacon = new Devices()
 // start the beacon service
