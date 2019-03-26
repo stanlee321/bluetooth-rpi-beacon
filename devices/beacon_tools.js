@@ -2,7 +2,7 @@ const DataBase = require('../db/db_base.js')
 const dateTime = require('node-datetime');
 
 // Isnstace of DB
-myDB = new DataBase('./telemetry_data.sqlite3')
+const myDB = new DataBase('./telemetry_data.sqlite3')
 
 module.exports = {
   
