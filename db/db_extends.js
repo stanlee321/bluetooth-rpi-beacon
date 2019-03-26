@@ -24,7 +24,7 @@ class InsertDB {
         INSERT INTO
         beacon (x,y,z,time,temp,signal) VALUES (?, ?, ?, ?, ?, ?)
         `
-        this.sqldb.run(sql, my_data);
+        return this.sqldb.run(sql, my_data);
     }
 }
 
