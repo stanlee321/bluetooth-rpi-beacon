@@ -1,7 +1,7 @@
-const DataBase = require('./db')
+const DataBase = require('./db.js');
 
 
-module.exports = class DBModule extends DataBase{
+module.exports = class DBModule extends DataBase {
     /*
     Extends the DataBase method with status and insterData
     */
@@ -11,9 +11,9 @@ module.exports = class DBModule extends DataBase{
     };
     
     insertData(my_data){
-        console.log("Insert data")
+        console.log("[INFO] Insert data")
         this.db.run('INSERT INTO beacon (x,y,z,time,temp,signal) VALUES (?, ?, ?, ?, ?, ?)', my_data);
-      }
+    }
       
 }
 
