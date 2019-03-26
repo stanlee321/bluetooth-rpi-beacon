@@ -186,6 +186,16 @@ cd:12:44:57:37:08 -30 undefined undefined [ 32, 0, 11, 167, 34, 0, 6, 152, 179, 
 ```
 
 Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacons.
+
+
+## Update 25.mar.2019
+
+Refactor of insertData methods so the beacon can log the gyro, temp signal data into the SQL in the format:
+
+<div style="text-align:center"><img src ="./timeseries/plots/data.png" /></div>
+
+The process of data collection for the algorithm creation has begun...
+
 ## Update 06.mar.2019
 
 * Added temperature address from 22 lenght vector
