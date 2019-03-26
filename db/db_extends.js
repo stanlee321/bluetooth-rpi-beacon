@@ -5,7 +5,9 @@ module.exports = class DBModule extends DataBase {
     /*
     Extends the DataBase method with status and insterData
     */
-
+    constructor(){
+        super();
+    }
     status(){
         console.log('ok')
     };
