@@ -1,4 +1,5 @@
-const DataBase = require('./db.js');
+"use strict";
+var DataBase = require('./db.js');
 
 
 module.exports = class DBModule extends DataBase {

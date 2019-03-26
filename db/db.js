@@ -1,6 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
 
 module.exports = class DataBase {
+    
     constructor(db_name){
         //var db = new sqlite3.Database(':memory:');
 
