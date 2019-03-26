@@ -10,7 +10,7 @@ module.exports = class DataBase {
         } else { 
             console.log('Database created!') 
             /* Put code to create table(s) here */
-            this.db.run("CREATE TABLE IF NOT EXISTS beacon(id INTEGER PRIMARY KEY AUTOINCREMENT, time STRING, _0 INTEGER, _1 INTEGER, _2 INTEGER, _3 INTEGER, _4 INTEGER, _5 INTEGER, _6 INTEGER, _7 INTEGER, _8 INTEGER, _9 INTEGER, _10 INTEGER, _11 INTEGER, _12 INTEGER, _13 INTEGER, _14 INTEGER, _15 INTEGER, _16 INTEGER, _17 INTEGER, _18 INTEGER, _19 INTEGER, _20 INTEGER, _21 INTEGER)", this.insertData);
+            this.db.run("CREATE TABLE IF NOT EXISTS beacon(id INTEGER PRIMARY KEY AUTOINCREMENT, x, y, z, time, temp, signal)", this.insertData);
         }
         })
     };

@@ -1,7 +1,11 @@
-const BeaconListener = require('./beacon_base.js')
+const DataBase = require('./db')
 
 
-module.exports = class BeaconModule extends BeaconListener{
+module.exports = class DBModule extends DataBase{
+    /*
+    Extends the DataBase method with status and insterData
+    */
+   
     status(){
         console.log('ok')
     };

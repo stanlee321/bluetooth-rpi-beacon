@@ -1,7 +1,7 @@
-var DataBase = require('../db/db.js')
+var DataBase = require('../db/db_extends')
 var dateTime = require('node-datetime');
 
-my_db = new DataBase('./telemetry_data.sqlite3')
+myDB = new DataBase('./telemetry_data.sqlite3')
 
 module.exports = {
   
@@ -50,7 +50,7 @@ module.exports = {
                            my_data.rssiDB]
                            
         console.log(JSON.stringify(my_data,  null, '\t'))
-        my_db.insertData(data_to_use)         
+        myDB.insertData(data_to_use)         
       }
     }
   }
