@@ -1,8 +1,19 @@
-const DataBase = require('../db/db_base.js')
+const DBExtends = require('../db/db_extends')
+const DBBase = require('../db/db_base')
 const dateTime = require('node-datetime');
 
 // Isnstace of DB
-const myDB = new DataBase('./telemetry_data.sqlite3')
+const sqldb = new DBBase('./telemetry_data.sqlite3')
+const sql_createtable = new DBExtends.CreateDB(sqldb)
+
+sql_createtable.createTable()
+      .then( r => {
+            console.log(`TABLE CREATED with response: ${r}`)
+      }).catch( e => {console.log('Error while creating Table')
+})
+
+const sql_insertdata = new DBExtends.InsertDB(sqldb)
+
 
 module.exports = {
   
@@ -51,7 +62,11 @@ module.exports = {
                            my_data.rssiDB]
                            
         console.log(JSON.stringify(my_data,  null, '\t'))
-        myDB.insertData(data_to_use)         
+        sql_insertdata.insertData(data_to_use).then(r => {
+          console.log(`Data INSERTED with log ${r}`)
+        }).catch( e => {
+          `CANNOT INSERT DATA because ${e}`
+        })
       }
     }
   }
