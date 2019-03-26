@@ -20,7 +20,223 @@ node -v
 npm -v
 
 ```
-## How to run
+### How to run the main app.
+
+Run the app with 
+```
+sudo node app.js
+
+```
+
+This will log the telemegry data for the debug device into the *.sqlite3 , and will output in the console:
+
+```json
+pi@raspberrypi:~/bluetooth-rpi-beacon $ cat logs_app 
+[INFO] Database created!
+Starting scan...
+Scanning started.
+TABLE CREATED with response: [object Object]
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -87,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-03-26 03:33:48",
+		"x": 16,
+		"y": 4,
+		"z": 60,
+		"temp": 28
+	}
+}
+[INFO] Inserting data
+Data INSERTED with log [object Object]
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -89,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-03-26 03:33:49",
+		"x": 229,
+		"y": 5,
+		"z": 54,
+		"temp": 27
+	}
+}
+[INFO] Inserting data
+Data INSERTED with log [object Object]
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -84,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-03-26 03:33:54",
+		"x": 224,
+		"y": 4,
+		"z": 53,
+		"temp": 28
+	}
+}
+
+```
+
+## Update 25.mar.2019
+
+Refactor of insertData methods so the beacon can log the gyro, temp signal data into the SQL in the format:
+
+<div style="text-align:center"><img src ="./timeseries/plots/data.png" /></div>
+
+The process of data collection for the algorithm creation has begun...
+
+## Update 06.mar.2019
+
+* Added temperature address from 22 lenght vector
+<div style="text-align:center"><img src ="./timeseries/plots/temp_ds_0.png" /></div>
+
+* Added main frontend scripts for draw time series data into the folder `frontend/index.hmtl`
+
+### TODO
+* Add Temperature value to the JSON Log
+* Implement REST API for get data values and plot live charts with the data using the frontend scripts.
+* Implement main classification algorithm for move/no-move.
+
+## Update 27.feb.2019
+Thanks to the plots, we identify the x y z componets of the telemetry in the array with 22 length. The next plot shows the behavior of moving the beacon in a table in X , later in Y and the Z componets.
+
+<div style="text-align:center"><img src ="./timeseries/plots/xyz.png" /></div>
+
+`a13` seems to be some kind of Force Sensor , accidentally I drop the device to the floor and this down in the graph for `a13` reflect this event.
+
+### Refactor
+
+A refactor process was made in the repo, now the principal modules of the script are in separate folders and sub classes. You can run the application with:
+
+```console
+pi@raspberrypi:~/beacons $ sudo node app.js
+```
+
+with the following log:
+
+
+```bash
+pi@raspberrypi:~/bluetooth-rpi-beacon $ sudo node app.js 
+Database created!
+Starting scan...
+Scanning started.
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -75,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-02-27 05:14:26",
+		"x": 232,
+		"y": 205,
+		"z": 246
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -73,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-02-27 05:14:39",
+		"x": 36,
+		"y": 42,
+		"z": 25
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -74,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-02-27 05:14:40",
+		"x": 63,
+		"y": 231,
+		"z": 241
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -60,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-02-27 05:14:41",
+		"x": 13,
+		"y": 244,
+		"z": 194
+	}
+}
+{
+	"addrs": "c1:93:da:19:eb:cd",
+	"rssiDB": -67,
+	"manufacturer": "Kontakt",
+	"uuid": "fe6a",
+	"telemetry": {
+		"timeStamp": "2019-02-27 05:14:42",
+		"x": 12,
+		"y": 244,
+		"z": 195
+	}
+}
+...
+
+```
+
+
+### TODO 
+* Identify the Temperature Service Address (wth the service discovery script)
+
+
+## Update
+Once the telemetry is activated in the beacon, we can access to the new peripheral.address ```c1:93:da:19:eb:cd```, this peripheral address emit 3 vector arrays types, from which we are just interested in the array with length of 22 .
+* [3,9,2,16,0,2,62,255,255,224,12,6,1,185,135,108,92,100,3,5,255,27]
+
+
+The example array has the properties for detect the beacon movements. We log this information into a my_db*.sqlite3 database. Here is the plot for the values of the array in a time series fashion, the most important arrays are the ones which are ploted below.
+
+#### Feature imporance
+
+The feature importance was checked using a histrogram for the timeseries data.
+ The feature importance is showed below:
+
+#### For Movement case
+<div style="text-align:center"><img src ="./timeseries/plots/features_mov.png" /></div>
+
+#### For Static case
+<div style="text-align:center"><img src ="./timeseries/plots/features.png" /></div>
+
+There are 22 features, from which it seems that just 8 participate in the movement-sensors.
+
+#### For Movement case
+
+For this scenario, the beacon was carried by a pedestrian for around 30 min, the movement of the pedestrian is displayed below.
+
+With y-logaritmic scale
+<div style="text-align:center"><img src ="./timeseries/plots/mydb_plot_log.png" /></div>
+
+With normal scale:
+<div style="text-align:center"><img src ="./timeseries/plots/mydb_plot.png" /></div>
+
+#### For the Static case
+
+In this state the beacon is left on a table for around 20 minutes.
+
+With y-logaritmic scale
+
+<div style="text-align:center"><img src ="./timeseries/plots/mydb_2_plot_log.png" /></div>
+
+With normal scale
+<div style="text-align:center"><img src ="./timeseries/plots/mydb_2_plot.png" /></div>
+
+
+## How to debug devices
 
 For find beacon devices:
 
@@ -187,159 +403,6 @@ cd:12:44:57:37:08 -30 undefined undefined [ 32, 0, 11, 167, 34, 0, 6, 152, 179, 
 
 Uncomment the line 12 in [puck.js](./puck.js) for full log for all the aviable services from beacons.
 
-
-## Update 25.mar.2019
-
-Refactor of insertData methods so the beacon can log the gyro, temp signal data into the SQL in the format:
-
-<div style="text-align:center"><img src ="./timeseries/plots/data.png" /></div>
-
-The process of data collection for the algorithm creation has begun...
-
-## Update 06.mar.2019
-
-* Added temperature address from 22 lenght vector
-<div style="text-align:center"><img src ="./timeseries/plots/temp_ds_0.png" /></div>
-
-* Added main frontend scripts for draw time series data into the folder `frontend/index.hmtl`
-
-### TODO
-* Add Temperature value to the JSON Log
-* Implement REST API for get data values and plot live charts with the data using the frontend scripts.
-* Implement main classification algorithm for move/no-move.
-
-## Update 27.feb.2019
-Thanks to the plots, we identify the x y z componets of the telemetry in the array with 22 length. The next plot shows the behavior of moving the beacon in a table in X , later in Y and the Z componets.
-
-<div style="text-align:center"><img src ="./timeseries/plots/xyz.png" /></div>
-
-`a13` seems to be some kind of Force Sensor , accidentally I drop the device to the floor and this down in the graph for `a13` reflect this event.
-
-### Refactor
-
-A refactor process was made in the repo, now the principal modules of the script are in separate folders and sub classes. You can run the application with:
-
-```console
-pi@raspberrypi:~/beacons $ sudo node app.js
-```
-
-with the following log:
-
-
-```bash
-pi@raspberrypi:~/bluetooth-rpi-beacon $ sudo node app.js 
-Database created!
-Starting scan...
-Scanning started.
-{
-	"addrs": "c1:93:da:19:eb:cd",
-	"rssiDB": -75,
-	"manufacturer": "Kontakt",
-	"uuid": "fe6a",
-	"telemetry": {
-		"timeStamp": "2019-02-27 05:14:26",
-		"x": 232,
-		"y": 205,
-		"z": 246
-	}
-}
-{
-	"addrs": "c1:93:da:19:eb:cd",
-	"rssiDB": -73,
-	"manufacturer": "Kontakt",
-	"uuid": "fe6a",
-	"telemetry": {
-		"timeStamp": "2019-02-27 05:14:39",
-		"x": 36,
-		"y": 42,
-		"z": 25
-	}
-}
-{
-	"addrs": "c1:93:da:19:eb:cd",
-	"rssiDB": -74,
-	"manufacturer": "Kontakt",
-	"uuid": "fe6a",
-	"telemetry": {
-		"timeStamp": "2019-02-27 05:14:40",
-		"x": 63,
-		"y": 231,
-		"z": 241
-	}
-}
-{
-	"addrs": "c1:93:da:19:eb:cd",
-	"rssiDB": -60,
-	"manufacturer": "Kontakt",
-	"uuid": "fe6a",
-	"telemetry": {
-		"timeStamp": "2019-02-27 05:14:41",
-		"x": 13,
-		"y": 244,
-		"z": 194
-	}
-}
-{
-	"addrs": "c1:93:da:19:eb:cd",
-	"rssiDB": -67,
-	"manufacturer": "Kontakt",
-	"uuid": "fe6a",
-	"telemetry": {
-		"timeStamp": "2019-02-27 05:14:42",
-		"x": 12,
-		"y": 244,
-		"z": 195
-	}
-}
-...
-
-```
-
-
-### TODO 
-* Identify the Temperature Service Address (wth the service discovery script)
-
-
-## Update
-Once the telemetry is activated in the beacon, we can access to the new peripheral.address ```c1:93:da:19:eb:cd```, this peripheral address emit 3 vector arrays types, from which we are just interested in the array with length of 22 .
-* [3,9,2,16,0,2,62,255,255,224,12,6,1,185,135,108,92,100,3,5,255,27]
-
-
-The example array has the properties for detect the beacon movements. We log this information into a my_db*.sqlite3 database. Here is the plot for the values of the array in a time series fashion, the most important arrays are the ones which are ploted below.
-
-#### Feature imporance
-
-The feature importance was checked using a histrogram for the timeseries data.
- The feature importance is showed below:
-
-#### For Movement case
-<div style="text-align:center"><img src ="./timeseries/plots/features_mov.png" /></div>
-
-#### For Static case
-<div style="text-align:center"><img src ="./timeseries/plots/features.png" /></div>
-
-There are 22 features, from which it seems that just 8 participate in the movement-sensors.
-
-#### For Movement case
-
-For this scenario, the beacon was carried by a pedestrian for around 30 min, the movement of the pedestrian is displayed below.
-
-With y-logaritmic scale
-<div style="text-align:center"><img src ="./timeseries/plots/mydb_plot_log.png" /></div>
-
-With normal scale:
-<div style="text-align:center"><img src ="./timeseries/plots/mydb_plot.png" /></div>
-
-#### For the Static case
-
-In this state the beacon is left on a table for around 20 minutes.
-
-With y-logaritmic scale
-
-<div style="text-align:center"><img src ="./timeseries/plots/mydb_2_plot_log.png" /></div>
-
-With normal scale
-<div style="text-align:center"><img src ="./timeseries/plots/mydb_2_plot.png" /></div>
 
 
 ## TODOS
