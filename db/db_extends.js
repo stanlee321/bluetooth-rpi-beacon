@@ -1,5 +1,5 @@
 "use strict";
-var DataBase = require('./db.js');
+var DataBase = require('./db_base.js/index.js');
 
 
 module.exports = class DBModule extends DataBase {
@@ -7,16 +7,7 @@ module.exports = class DBModule extends DataBase {
     Extends the DataBase method with status and insterData
     */
 
-    status(){
-        console.log('ok')
-    };
-    
-    insertData(my_data){
-        console.log(this.sqldb)
-        console.log("[INFO] Insert data")
-        this.sqldb.run('INSERT INTO beacon (x,y,z,time,temp,signal) VALUES (?, ?, ?, ?, ?, ?)', my_data);
-    }
-      
+
 }
 
   

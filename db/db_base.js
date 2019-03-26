@@ -1,7 +1,7 @@
 var sqlite3 = require('sqlite3').verbose();
 
 module.exports = class DataBase {
-    
+
     constructor(db_name){
         //var db = new sqlite3.Database(':memory:');
 
@@ -15,5 +15,16 @@ module.exports = class DataBase {
             }
         })
     };
+    
+    status(){
+        console.log('ok')
+    };
+    
+    insertData(my_data){
+        console.log(this.sqldb)
+        console.log("[INFO] Insert data")
+        this.sqldb.run('INSERT INTO beacon (x,y,z,time,temp,signal) VALUES (?, ?, ?, ?, ?, ?)', my_data);
+    }
+      
 
 }
