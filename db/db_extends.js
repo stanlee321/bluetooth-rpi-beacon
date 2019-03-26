@@ -1,6 +1,3 @@
-"use strict";
-var DataBase = require('./db_base.js/index.js');
-
 class CreateDB {
     constructor(sqldb){
         this.sqldb = sqldb
