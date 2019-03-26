@@ -1,7 +1,7 @@
 var DataBase = require('../db/db.js')
 var dateTime = require('node-datetime');
 
-my_db = new DataBase('./mydb.sqlite3')
+my_db = new DataBase('./telemetry_data.sqlite3')
 
 module.exports = {
   
@@ -33,6 +33,7 @@ module.exports = {
           rssiDB: peripheral.rssi,
           manufacturer: peripheral.advertisement.localName,
           uuid: peripheral.advertisement.serviceData[0].uuid,
+          
           telemetry: {
             timeStamp: my_values[0],
             x: my_values[5],
@@ -41,7 +42,13 @@ module.exports = {
             temp: my_values[22]
           }
         };
-        let data_to_use = [telemetry.x, telemetry.y, telemetry.z, telemetry.timeStamp, telemetry.temp]
+        let data_to_use = [my_data.telemetry.x,
+                           my_data.telemetry.y, 
+                           my_data.telemetry.z, 
+                           my_data.telemetry.timeStamp, 
+                           my_data.telemetry.temp,
+                           my_data.rssiDB]
+                           
         console.log(JSON.stringify(my_data,  null, '\t'))
         my_db.insertData(data_to_use)         
       }
