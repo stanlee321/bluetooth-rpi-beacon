@@ -14,9 +14,9 @@ module.exports = class DataBase {
         })
     };
     
-    run(params = []) {
+    run(sql, params = []) {
         return new Promise((resolve, reject) => {
-          this.sqldb.run('INSERT INTO beacon (x,y,z,time,temp,signal) VALUES (?, ?, ?, ?, ?, ?)', params, function (err) {
+          this.sqldb.run(sql, params, function (err) {
             if (err) {
               console.log('Error running sql ' + sql)
               console.log(err)
