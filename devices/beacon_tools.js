@@ -37,11 +37,13 @@ module.exports = {
             timeStamp: my_values[0],
             x: my_values[5],
             y: my_values[6],
-            z: my_values[7]
+            z: my_values[7],
+            temp: my_values[22]
           }
         };
+        let data_to_use = [telemetry.x, telemetry.y, telemetry.z, telemetry.timeStamp, telemetry.temp]
         console.log(JSON.stringify(my_data,  null, '\t'))
-        // my_db.insertData(my_values)         
+        my_db.insertData(data_to_use)         
       }
     }
   }
