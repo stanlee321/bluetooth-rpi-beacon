@@ -2,6 +2,8 @@
 
 Test script for debug the beacons.
 
+<div style="text-align:center"><img src ="./timeseries/plots/full_data.png" /></div>
+
 ## Installation
 
 You must to install node v9 for ARMv7 devices.  Follow [this](https://www.instructables.com/id/Install-Nodejs-and-Npm-on-Raspberry-Pi/) tutorial. Also, follow noble instruction for install [noble](https://github.com/noble/noble).
@@ -30,7 +32,8 @@ sudo node app.js
 
 This will log the telemegry data for the debug device into the *.sqlite3 , and will output in the console:
 
-```json
+```console
+
 pi@raspberrypi:~/bluetooth-rpi-beacon $ cat logs_app 
 [INFO] Database created!
 Starting scan...
@@ -81,6 +84,43 @@ Data INSERTED with log [object Object]
 }
 
 ```
+# How to plot
+
+From the root of the proyect, cd into `timeseries/` folder  and run the script `exploredata.py`
+
+```console
+$ cd timeseries/
+$ python exploredata.py
+
+```
+
+This script `exploredata.py` expects the sqlite3 db `telemetry_data.py` in the root of the project for run the plots. if `__init__` is :
+
+```python
+
+if __name__ == '__main__':
+    model = DataManager()
+
+    database = "../telemetry_data.sqlite3"
+
+    # Clean dataframe
+    df = model.get_df(database, use_all=False)
+
+    # Add magnitude
+    df = model.add_magnitude(df)
+    
+    # Convert to series wtih 60 seg window
+    series = model.df_to_series(df, '60s')
+
+    # Plot
+    model.plot_df(series, save=False)
+
+```
+
+## Update 28.mar.2019
+
+Updated ` exploredata.py` script for plot the corrent fields in `telemetry_data.sqlite3`
+Update `README.md` with instructions of how to run the plot script.
 
 ## Update 25.mar.2019
 
