@@ -2,7 +2,7 @@
 
 Test script for debug the beacons.
 
-<div style="text-align:center"><img src ="./timeseries/plots/full_data.png" /></div>
+<div style="text-align:center"><img src ="./timeseries/plots/full_plot.png" /></div>
 
 ## Installation
 
